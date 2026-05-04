@@ -1,4 +1,4 @@
-# 🧠 AI Code Reviewer
+# AI Code Reviewer
 
 An AI-powered code review platform that analyzes git diffs and provides **line-level security and quality feedback** in real-time through a VS Code–style interface.
 
