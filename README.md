@@ -282,8 +282,9 @@ Built to replicate and extend modern AI-assisted development tools like:
 
 ---
 
-## 👤 Author
+## Author
 
 Annafi Islam
 GitHub: https://github.com/DevAnnafi
-# AI_Code_Reviewer
+
+
