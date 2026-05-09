@@ -12,6 +12,14 @@ def run_review(request: ReviewRequest) -> ReviewResponse:
     for chunk in stream_review(prompt, SYSTEM_PROMPT):
         raw += chunk
 
+    # strip markdown code fences if Claude adds them
+    raw = raw.strip()
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1]  # remove first line (```json)
+    if raw.endswith("```"):
+        raw = raw.rsplit("\n", 1)[0]  # remove last line (```)
+    raw = raw.strip()
+
     data = json.loads(raw)
 
     findings = [Issue(**f) for f in data.get("findings", [])]

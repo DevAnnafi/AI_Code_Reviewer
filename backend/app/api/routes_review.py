@@ -1,22 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from models.review_request import ReviewRequest
 from models.review_response import ReviewResponse
-from models.issue import Issue
+from services.reviewer import run_review
 
 router = APIRouter()
 
 @router.post("/", response_model=ReviewResponse)
 async def review_code(request: ReviewRequest):
-    dummy = Issue(
-        line=1,
-        severity="high",
-        category="injection",
-        message="Potential SQL injection",
-        suggestion="Use parameterized queries"
-    )
-    return ReviewResponse(
-        findings=[dummy],
-        summary="1 issue found",
-        overall_severity="high",
-        language=request.language
-    )
+    try:
+        result = run_review(request)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
