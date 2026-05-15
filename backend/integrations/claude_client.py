@@ -13,4 +13,4 @@ def stream_review(prompt: str, system_prompt: str):
         ]
     ) as stream:
         for text in stream.text_stream:
-            yield text
+            yield text 
